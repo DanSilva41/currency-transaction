@@ -27,8 +27,8 @@
     <img alt="made by Danilo Silva" src="https://img.shields.io/badge/made%20by-Danilo%20Silva-blue">
   </a>
 
-  <a href="https://blog.rocketseat.com.br/">
-    <img alt="Stargazers" src="https://img.shields.io/badge/Blog-Developers%20Friends-orange">
+  <a href="https://developers-friends.gitbook.io/">
+    <img alt="Developer's Friends" src="https://img.shields.io/badge/Blog-Developers%20Friends-orange">
     </a> 
 </p>
 
