@@ -22,3 +22,8 @@ management:
     health:
       show-details: always
 
+springdoc:
+  swagger-ui:
+    url: /open-api.yaml
+  show-actuator: true
+

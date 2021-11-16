@@ -16,7 +16,7 @@ public class ConversionTransactionRequest {
     @NotNull(message = "{global.cannot-be-null}")
     @DecimalMin(value = "0.01", message = "{fields.destinationCurrency.min}")
     @DecimalMax(value = "999999999.99", message = "{fields.destinationCurrency.max}")
-    private BigDecimal originValue;
+    private BigDecimal sourceValue;
 
     public String getOriginCurrency() {
         return originCurrency;
@@ -26,7 +26,7 @@ public class ConversionTransactionRequest {
         return destinationCurrency;
     }
 
-    public BigDecimal getOriginValue() {
-        return originValue;
+    public BigDecimal getSourceValue() {
+        return sourceValue;
     }
 }
