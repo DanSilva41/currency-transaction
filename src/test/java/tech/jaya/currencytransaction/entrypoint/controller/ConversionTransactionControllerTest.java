@@ -88,7 +88,7 @@ class ConversionTransactionControllerTest {
                 .jsonPath("$.destinationCurrency").isEqualTo(conversionTransaction.getDestinationCurrency())
                 .jsonPath("$.destinationValue").isEqualTo(conversionTransaction.getDestinationValue())
                 .jsonPath("$.conversionRate").isEqualTo(conversionTransaction.getConversionRate())
-                .jsonPath("$.transactionTime").isEqualTo(conversionTransaction.getTransactionTime().toString());
+                .jsonPath("$.transactionTime").isNotEmpty();
 
         Mockito.verify(convertCurrencies, times(1)).execute(any(ConversionTransaction.class));
     }
