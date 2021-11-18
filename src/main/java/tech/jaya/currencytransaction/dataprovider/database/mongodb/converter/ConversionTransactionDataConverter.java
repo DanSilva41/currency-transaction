@@ -1,14 +1,15 @@
 package tech.jaya.currencytransaction.dataprovider.database.mongodb.converter;
 
-import org.springframework.stereotype.Component;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import reactor.core.publisher.Mono;
 import tech.jaya.currencytransaction.core.model.ConversionTransaction;
 import tech.jaya.currencytransaction.dataprovider.database.mongodb.collection.ConversionTransactionData;
 
-@Component
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ConversionTransactionDataConverter {
 
-    public Mono<ConversionTransaction> toConversionTransaction(ConversionTransactionData source) {
+    public static Mono<ConversionTransaction> toConversionTransaction(ConversionTransactionData source) {
         return Mono.just(ConversionTransaction.builder()
                 .identifier(source.getIdentifier())
                 .userIdentifier(source.getUserIdentifier())
@@ -21,7 +22,7 @@ public class ConversionTransactionDataConverter {
                 .build());
     }
 
-    public ConversionTransactionData toConversionTransactionData(ConversionTransaction source) {
+    public static ConversionTransactionData toConversionTransactionData(ConversionTransaction source) {
         return ConversionTransactionData.builder()
                 .identifier(source.getIdentifier())
                 .userIdentifier(source.getUserIdentifier())

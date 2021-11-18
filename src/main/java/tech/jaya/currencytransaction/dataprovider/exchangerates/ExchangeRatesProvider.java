@@ -1,6 +1,5 @@
 package tech.jaya.currencytransaction.dataprovider.exchangerates;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@RequiredArgsConstructor
 @Component
 public class ExchangeRatesProvider implements CurrencyLayer {
 
@@ -24,8 +22,6 @@ public class ExchangeRatesProvider implements CurrencyLayer {
 
     @Value("${app.client.exchangeratesapi.accessKey}")
     private String exchangeRatesAccessKey;
-
-    private final ExchangeRatesResponseConverter exchangeRatesResponseConverter;
 
     public Mono<ExchangeRates> getConversionRates(final String originCurrency, final String destinationCurrency) {
         log.debug("Provider | ExchangeRates | getConversionRates");
@@ -36,7 +32,7 @@ public class ExchangeRatesProvider implements CurrencyLayer {
                 })
                 .target(ExchangeRatesClient.class, exchangeRatesURL)
                 .getAllUsers(getQueryParamsExchangeWithSymbols(originCurrency, destinationCurrency))
-                .flatMap(exchangeRatesResponseConverter::toExchangeRates);
+                .flatMap(ExchangeRatesResponseConverter::toExchangeRates);
     }
 
     public Map<String, Object> getQueryParamsExchangeWithSymbols(final String originCurrency, final String destinationCurrency) {

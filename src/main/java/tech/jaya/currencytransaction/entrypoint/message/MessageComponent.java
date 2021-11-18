@@ -1,12 +1,12 @@
 package tech.jaya.currencytransaction.entrypoint.message;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import tech.jaya.currencytransaction.core.exception.ErrorMessage;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Component
 public class MessageComponent {
 

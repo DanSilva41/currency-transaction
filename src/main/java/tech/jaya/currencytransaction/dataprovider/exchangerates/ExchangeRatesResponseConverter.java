@@ -1,13 +1,14 @@
 package tech.jaya.currencytransaction.dataprovider.exchangerates;
 
-import org.springframework.stereotype.Component;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import reactor.core.publisher.Mono;
 import tech.jaya.currencytransaction.core.model.ExchangeRates;
 
-@Component
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExchangeRatesResponseConverter {
 
-    public Mono<ExchangeRates> toExchangeRates(final ExchangeRatesResponse exchangeRatesResponse) {
+    public static Mono<ExchangeRates> toExchangeRates(final ExchangeRatesResponse exchangeRatesResponse) {
         return Mono.just(ExchangeRates.builder()
                 .success(exchangeRatesResponse.isSuccess())
                 .rates(exchangeRatesResponse.getRates())

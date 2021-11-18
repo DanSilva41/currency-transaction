@@ -1,14 +1,15 @@
 package tech.jaya.currencytransaction.entrypoint.controller.converter;
 
-import org.springframework.stereotype.Component;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import reactor.core.publisher.Mono;
-import tech.jaya.currencytransaction.entrypoint.controller.vm.ConversionTransactionRequest;
 import tech.jaya.currencytransaction.core.model.ConversionTransaction;
+import tech.jaya.currencytransaction.entrypoint.controller.vm.ConversionTransactionRequest;
 
-@Component
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ConversionTransactionRequestConverter {
 
-    public Mono<ConversionTransaction> toConversionTransaction(final String userId, final ConversionTransactionRequest request) {
+    public static Mono<ConversionTransaction> toConversionTransaction(final String userId, final ConversionTransactionRequest request) {
         return Mono.just(ConversionTransaction.builder()
                 .userIdentifier(userId)
                 .originCurrency(request.getOriginCurrency())

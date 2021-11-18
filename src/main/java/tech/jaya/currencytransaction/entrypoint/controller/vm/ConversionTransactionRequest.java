@@ -1,12 +1,16 @@
 package tech.jaya.currencytransaction.entrypoint.controller.vm;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class ConversionTransactionRequest {
 

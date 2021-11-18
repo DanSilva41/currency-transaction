@@ -1,6 +1,6 @@
 package tech.jaya.currencytransaction.entrypoint.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +22,7 @@ import java.util.List;
  * Reactive REST controller to manage currencies transactions
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/transaction")
@@ -30,8 +30,6 @@ public class ConversionTransactionController {
 
     private final ConvertCurrencies convertCurrencies;
     private final GetConvertTransactionsByUser getConvertTransactionsByUser;
-    private final ConversionTransactionRequestConverter requestConverter;
-    private final ConversionTransactionResponseConverter responseConverter;
 
 
     @ResponseStatus(HttpStatus.OK)
@@ -40,7 +38,7 @@ public class ConversionTransactionController {
         log.info("allCurrenciesTransactions: userId = {}", userId);
 
         return getConvertTransactionsByUser.execute(userId)
-                .flatMap(responseConverter::toConversionTransactionResponse)
+                .flatMap(ConversionTransactionResponseConverter::toConversionTransactionResponse)
                 .collectList()
                 .flatMap(transactions -> {
                     if (transactions.isEmpty())
@@ -55,9 +53,9 @@ public class ConversionTransactionController {
                                                                  @Valid @RequestBody final ConversionTransactionRequest request) {
         log.info("convertCurrencies: userId = {} | request = {}", userId, request);
 
-        return requestConverter.toConversionTransaction(userId, request)
+        return ConversionTransactionRequestConverter.toConversionTransaction(userId, request)
                 .flatMap(convertCurrencies::execute)
-                .flatMap(responseConverter::toConversionTransactionResponse);
+                .flatMap(ConversionTransactionResponseConverter::toConversionTransactionResponse);
     }
 
 }
