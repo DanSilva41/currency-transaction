@@ -1,8 +1,6 @@
 package tech.jaya.currencytransaction.core.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,12 +12,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@Document
 public class ConversionTransaction extends CalculateCurrenciesConversion {
 
     @EqualsAndHashCode.Include
     @Builder.Default
-    @Id
     private String identifier = UUID.randomUUID().toString();
     private String userIdentifier;
     private String originCurrency;
