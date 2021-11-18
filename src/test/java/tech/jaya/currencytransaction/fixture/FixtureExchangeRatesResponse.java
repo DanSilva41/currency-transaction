@@ -2,7 +2,7 @@ package tech.jaya.currencytransaction.fixture;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import tech.jaya.currencytransaction.dataprovider.exchangerates.ExchangeRatesResponse;
+import tech.jaya.currencytransaction.dataprovider.client.exchangerates.ExchangeRatesResponse;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
