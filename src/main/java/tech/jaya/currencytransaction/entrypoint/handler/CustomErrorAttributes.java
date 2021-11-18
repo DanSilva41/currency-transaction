@@ -1,4 +1,4 @@
-package tech.jaya.currencytransaction.controller.handler;
+package tech.jaya.currencytransaction.entrypoint.handler;
 
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
@@ -9,8 +9,9 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebInputException;
 import org.springframework.web.server.UnsupportedMediaTypeStatusException;
-import tech.jaya.currencytransaction.support.ErrorMessage;
-import tech.jaya.currencytransaction.support.MessageComponent;
+import tech.jaya.currencytransaction.core.exception.BaseBusinessException;
+import tech.jaya.currencytransaction.core.exception.ErrorMessage;
+import tech.jaya.currencytransaction.entrypoint.message.MessageComponent;
 
 import java.util.Map;
 import java.util.Optional;
@@ -36,6 +37,10 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
         var apiError = buildDefaultApiErrorAttributes(defaultErrorAttributes);
         if (apiError.getStatus() == HttpStatus.NOT_FOUND.value()) {
             apiError.setMessage(messageComponent.getMessage(ErrorMessage.RESOURCE_NOT_FOUND));
+        } else if (throwable instanceof BaseBusinessException) {
+            var baseBusinessException = (BaseBusinessException) throwable;
+            apiError.setStatus(baseBusinessException.getStatus());
+            apiError.setMessage(messageComponent.getMessage(baseBusinessException.getErrorMessage()));
         } else if (throwable instanceof ResponseStatusException) {
             var responseStatusException = (ResponseStatusException) throwable;
 

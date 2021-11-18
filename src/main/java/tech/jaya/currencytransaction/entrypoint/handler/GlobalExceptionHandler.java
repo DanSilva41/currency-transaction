@@ -1,4 +1,4 @@
-package tech.jaya.currencytransaction.controller.handler;
+package tech.jaya.currencytransaction.entrypoint.handler;
 
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;

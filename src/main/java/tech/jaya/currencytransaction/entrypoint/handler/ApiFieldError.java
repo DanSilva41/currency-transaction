@@ -1,4 +1,4 @@
-package tech.jaya.currencytransaction.controller.handler;
+package tech.jaya.currencytransaction.entrypoint.handler;
 
 public class ApiFieldError {
 

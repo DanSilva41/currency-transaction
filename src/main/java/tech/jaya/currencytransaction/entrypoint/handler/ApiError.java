@@ -1,4 +1,4 @@
-package tech.jaya.currencytransaction.controller.handler;
+package tech.jaya.currencytransaction.entrypoint.handler;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,7 +10,7 @@ public class ApiError {
 
     private final String requestId;
     @JsonIgnore
-    private final int status;
+    private int status;
     private String message;
     private List<ApiFieldError> errors;
 
@@ -31,6 +31,10 @@ public class ApiError {
 
     public int getStatus() {
         return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getMessage() {
