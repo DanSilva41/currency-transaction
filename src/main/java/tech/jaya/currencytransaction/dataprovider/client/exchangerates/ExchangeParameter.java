@@ -1,4 +1,4 @@
-package tech.jaya.currencytransaction.dataprovider.exchangerates;
+package tech.jaya.currencytransaction.dataprovider.client.exchangerates;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

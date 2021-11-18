@@ -1,4 +1,4 @@
-package tech.jaya.currencytransaction.dataprovider.exchangerates;
+package tech.jaya.currencytransaction.dataprovider.client.exchangerates;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +28,7 @@ public class ExchangeRatesProvider implements CurrencyLayer {
         return WebReactiveFeign.<ExchangeRatesClient>builder()
                 .fallback(e -> {
                     log.error("Provider | ExchangeRates | Error when execute :getConversionRates: | {}", e);
-                    return Mono.error(new BaseBusinessException(ErrorMessage.ERROR_FAIL_GET_EXCHANGE_RATES));
+                    return Mono.error(new BaseBusinessException(ErrorMessage.FAIL_GET_EXCHANGE_RATES));
                 })
                 .target(ExchangeRatesClient.class, exchangeRatesURL)
                 .getAllUsers(getQueryParamsExchangeWithSymbols(originCurrency, destinationCurrency))

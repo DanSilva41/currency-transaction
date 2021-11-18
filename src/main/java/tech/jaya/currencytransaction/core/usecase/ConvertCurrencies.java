@@ -29,7 +29,7 @@ public class ConvertCurrencies {
                 .doOnNext(exchangeRates -> {
                     var currencies = Set.of(conversionToExecute.getOriginCurrency(), conversionToExecute.getDestinationCurrency());
                     if (exchangeRates.isInvalidRates(currencies))
-                        throw new BaseBusinessException(ErrorMessage.ERROR_WAS_NOT_POSSIBLE_GET_EXCHANGE_RATES);
+                        throw new BaseBusinessException(ErrorMessage.WAS_NOT_POSSIBLE_GET_EXCHANGE_RATES);
                 })
                 .flatMap(exchangeRates -> {
                     callConversion(exchangeRates, conversionToExecute);

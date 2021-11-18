@@ -1,16 +1,18 @@
 package tech.jaya.currencytransaction.core.model;
 
 import lombok.*;
+import tech.jaya.currencytransaction.core.exception.BaseBusinessException;
+import tech.jaya.currencytransaction.core.exception.ErrorMessage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class ConversionTransaction extends CalculateCurrenciesConversion {
 
@@ -27,9 +29,17 @@ public class ConversionTransaction extends CalculateCurrenciesConversion {
 
     public void convertCurrencies(final BigDecimal rateOfOriginCurrency,
                                   final BigDecimal rateOfDestinationCurrency) {
+        if (conversionHasAlreadyTakenPlace())
+            throw new BaseBusinessException(ErrorMessage.CONVERSION_ALREADY_TAKEN_PLACE);
         this.destinationValue = super.convertValue(originValue, rateOfOriginCurrency, rateOfDestinationCurrency);
         this.conversionRate = super.getConversionRate(originValue, destinationValue);
         this.transactionTime = LocalDateTime.now();
+    }
+
+    private boolean conversionHasAlreadyTakenPlace() {
+        return Objects.nonNull(destinationValue)
+                || Objects.nonNull(conversionRate)
+                || Objects.nonNull(transactionTime);
     }
 
     public boolean verifyIfOriginAndDestinationCurrencySame() {
