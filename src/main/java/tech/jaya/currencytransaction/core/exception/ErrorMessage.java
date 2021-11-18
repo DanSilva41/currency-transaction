@@ -1,0 +1,29 @@
+package tech.jaya.currencytransaction.core.exception;
+
+import java.util.Arrays;
+
+public enum ErrorMessage {
+
+    RESOURCE_NOT_FOUND("global.resource-not-found"),
+    REQUEST_BODY_MISSING("global.request-body-missing"),
+    UNSUPPORTED_MEDIA_TYPE("global.unsupported-media-type"),
+    CURRENCIES_MUST_BE_DIFFERENT("validation.must-be-different-currencies"),
+    ERROR_WAS_NOT_POSSIBLE_GET_EXCHANGE_RATES("error.was-not-possible-get-exchange-rates"),
+    ERROR_FAIL_GET_EXCHANGE_RATES("error.fail-get-exchange-rates");
+
+    private final String identifier;
+
+    ErrorMessage(final String identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public static ErrorMessage getByIdentifier(final String identifier) {
+        return Arrays.stream(ErrorMessage.values())
+                .filter(errorMessage -> errorMessage.getIdentifier().equals(identifier))
+                .findFirst().orElse(null);
+    }
+}
