@@ -1,10 +1,7 @@
 package tech.jaya.currencytransaction.entrypoint.controller.converter;
 
 import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
-import tech.jaya.currencytransaction.core.model.ConversionTransaction;
 import tech.jaya.currencytransaction.fixture.FixtureConversionTransaction;
-import tech.jaya.currencytransaction.fixture.FixtureConversionTransactionRequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
