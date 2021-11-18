@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class ExchangeRates {
     private boolean success;
     private Map<String, BigDecimal> rates;
 
-    public boolean isInvalidRates(final List<String> ratesForCompare) {
+    public boolean isInvalidRates(final Set<String> ratesForCompare) {
         return rates.size() != 2 || !ratesForCompare.stream().allMatch(rates::containsKey);
     }
 }

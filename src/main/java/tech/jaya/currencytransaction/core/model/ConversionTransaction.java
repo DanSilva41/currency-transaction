@@ -35,4 +35,8 @@ public class ConversionTransaction extends CalculateCurrenciesConversion {
         this.conversionRate = super.getConversionRate(originValue, destinationValue);
         this.transactionTime = LocalDateTime.now();
     }
+
+    public boolean verifyIfOriginAndDestinationCurrencySame() {
+        return this.originCurrency.equalsIgnoreCase(destinationCurrency);
+    }
 }
