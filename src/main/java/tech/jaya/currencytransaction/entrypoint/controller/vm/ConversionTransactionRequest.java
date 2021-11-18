@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 public class ConversionTransactionRequest {
 
     @NotBlank(message = "{global.cannot-be-empty}")
-    @Size(max = 3, message = "{validation.fields.originCurrency.size}")
+    @Size(min = 3, max = 3, message = "{validation.fields.originCurrency.size}")
     private String originCurrency;
 
     @NotBlank(message = "{global.cannot-be-empty}")
-    @Size(max = 3, message = "{validation.fields.destinationCurrency.size}")
+    @Size(min = 3, max = 3, message = "{validation.fields.destinationCurrency.size}")
     private String destinationCurrency;
 
     @NotNull(message = "{global.cannot-be-null}")

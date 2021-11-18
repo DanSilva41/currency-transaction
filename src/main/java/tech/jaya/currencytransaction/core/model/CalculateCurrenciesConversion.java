@@ -3,12 +3,12 @@ package tech.jaya.currencytransaction.core.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-class CalculateCurrenciesConversion {
+abstract class CalculateCurrenciesConversion {
 
     protected BigDecimal convertValue(final BigDecimal originValue, final BigDecimal rateOfOriginCurrency,
                                       final BigDecimal rateOfDestinationCurrency) {
-        var valueInBaseCurrency = originValue.multiply(BigDecimal.ONE.divide(rateOfOriginCurrency, 6, RoundingMode.FLOOR));
-        return valueInBaseCurrency.multiply(rateOfDestinationCurrency).setScale(2, RoundingMode.FLOOR);
+        var valueInBaseCurrency = originValue.multiply(BigDecimal.ONE.divide(rateOfDestinationCurrency, 6, RoundingMode.FLOOR));
+        return valueInBaseCurrency.multiply(rateOfOriginCurrency).setScale(2, RoundingMode.FLOOR);
     }
 
     protected BigDecimal getConversionRate(final BigDecimal originValue, final BigDecimal destinationValue) {
