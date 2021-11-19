@@ -76,6 +76,7 @@ The project was developed using the following technologies
 
 ```text
 .
+├── code-quality-enforcement                                Directory that stores files related to code quality
 ├── docs                                                    README.md documentation related files
 ├── logs                                                    Folder that stores application log records
 ├── src
