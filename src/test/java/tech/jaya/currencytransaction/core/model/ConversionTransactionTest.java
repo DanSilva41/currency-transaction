@@ -19,17 +19,17 @@ class ConversionTransactionTest {
                 .userIdentifier("1")
                 .originCurrency("BRL")
                 .destinationCurrency("USD")
-                .originValue(new BigDecimal("20"))
+                .originValue(new BigDecimal("10"))
                 .build();
 
         assertNull(oneConversionTransaction.getDestinationValue());
         assertNull(oneConversionTransaction.getConversionRate());
         assertNull(oneConversionTransaction.getTransactionTime());
 
-        oneConversionTransaction.convertCurrencies(new BigDecimal("6.333688"), new BigDecimal("1.137314"));
+        oneConversionTransaction.convertCurrencies(new BigDecimal("6.269056"), new BigDecimal("1.128929"));
 
-        assertEquals(new BigDecimal("111.37"), oneConversionTransaction.getDestinationValue());
-        assertEquals(new BigDecimal("5.568500"), oneConversionTransaction.getConversionRate());
+        assertEquals(new BigDecimal("1.80"), oneConversionTransaction.getDestinationValue());
+        assertEquals(new BigDecimal("0.180000"), oneConversionTransaction.getConversionRate());
         assertNotNull(oneConversionTransaction.getTransactionTime());
     }
 
