@@ -75,4 +75,55 @@ The project was developed using the following technologies
 
 ---
 
+## Checkstyle
+
+<details>
+    <summary>01. Checking the project via maven plugin</summary>
+
+- To run the check in the project, just use this maven command in shell/console or run via IDEA.
+
+```bash
+    mvn checkstyle:check
+```
+- To generate a report from the analysis of code style violations, just use this maven command in shell/console or run via IDEA.
+
+```bash
+    mvn checkstyle:checkstyle
+```
+Report generated in **target/site/checkstyle.html**.
+
+</details>
+
+<details>
+    <summary>02. Installing the CheckStyle-IDEA plugin on IntelliJ</summary>
+    
+We can use the CheckStyle-IDEA plugin to help formatting code in the IDE.
+To configure it is very simple, first install the plugin via the link above or on IntelliJ at
+**File > Settings > Plugins**.
+
+![Install plugin Checkstyle IDEA](docs/checkstyle/install-plugin-checkstyle.png)
+
+### 02. Configuring the CheckStyle-IDEA plugin
+
+- After installation, we need to import the settings defined in the checkstyle.xml file into the CheckStyle-IDEA plugin.
+  Navigate to **File > Settings > Tools > Checkstyle** and in **Configuration File** click **Add** (+ sign on the right), indicate the path of your checkstyle.xml and click next.
+
+![Configure the Checkstyle IDEA - First](docs/checkstyle/configure-checkstyle-intellij-first.png)
+
+- With the file imported, don't forget to leave it selected as **Active**.
+
+![Configure the Checkstyle IDEA - Second](docs/checkstyle/configure-checkstyle-intellij-second.png)
+
+- Now let's add the same checkstyle file to the IntelliJ settings itself, so when we use the default formatting shortcuts it will automatically look for Checkstyle Main.
+  Within settings, go to **Editor > Code Style > Java** and import the file as shown in the image below:
+
+![Set code style look checkstyle](docs/checkstyle/set-code-style-look-checkstyle.png)
+
+- Once these settings are finished, the CheckStyle option will appear at the bottom of IntelliJ and when clicking, the screen below will appear.
+  At this point, in Rules select the one you imported in the previous steps and run the verification.
+
+- In Intellij IDEA, select the project, package(s) or class(es) and **Right click > Analyse > Inspect Code... > OK** then plugin will indicate the problems found.
+
+</details>
+
 Developed by Danilo Silva
