@@ -6,6 +6,7 @@ import tech.jaya.currencytransaction.core.exception.ErrorMessage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public class ConversionTransaction extends CalculateCurrenciesConversion {
             throw new BaseBusinessException(ErrorMessage.CONVERSION_ALREADY_TAKEN_PLACE);
         this.destinationValue = super.convertValue(originValue, rateOfOriginCurrency, rateOfDestinationCurrency);
         this.conversionRate = super.getConversionRate(originValue, destinationValue);
-        this.transactionTime = LocalDateTime.now();
+        this.transactionTime = LocalDateTime.now(ZoneOffset.UTC);
     }
 
     private boolean conversionHasAlreadyTakenPlace() {
