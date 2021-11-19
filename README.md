@@ -1,15 +1,14 @@
-<div style="text-align: center">
-    <img src="docs/logo.png" alt="Currency Transaction">
+<img align="center" src="docs/logo.png" alt="Currency Transaction">
     
-<h4>
+<h4 align="center">
     <a href="https://rocketmusics.herokuapp.com/">Live demo</a>
 </h4>
 
-<h3 style="text-align: center">
+<h3 align="center">
     Application responsible for converting currencies using external API
 </h3>
 
-<p style="text-align: center">
+<p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/dansilva41/currency-transaction?color=%2304D361">
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/dansilva41/currency-transaction">
@@ -20,10 +19,10 @@
 
    <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
    <a href="https://github.com/dansilva41/currency-transaction/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/dansilva41/currency-transaction?style=social">
+    <img alt="MIT License" src="https://img.shields.io/github/stars/dansilva41/currency-transaction?style=social">
   </a>
 
-  <a href="https://rocketseat.com.br">
+  <a href="https://dansilva41.github.io">
     <img alt="made by Danilo Silva" src="https://img.shields.io/badge/made%20by-Danilo%20Silva-blue">
   </a>
 
@@ -32,21 +31,21 @@
     </a> 
 </p>
 
-<p>
- <a href="#about">About</a> •
- <a href="#technologies">Technologies</a> •
- <a href="#install">Install</a>
+<p align="center">
+ <a href="#dizzy-about">About</a> •
+ <a href="#rocket-technologies">Technologies</a> •
+ <a href="#install">Install</a> •
+ <a href="#memo-license">License</a>
 
 </p>
-</div>
 
-## 🔖 About
+## :dizzy: About
 
 Writing...
 
 ---
 
-## 🚀 Technologies
+## :rocket: Technologies
 
 The project was developed using the following technologies
 
@@ -74,6 +73,9 @@ The project was developed using the following technologies
 ```
 
 ---
+
+## :memo: License
+This project is under the MIT license. See the [LICENSE](https://github.com/dansilva41/currency-transaction/blob/main/LICENSE) for more information.
 
 ## Checkstyle
 
