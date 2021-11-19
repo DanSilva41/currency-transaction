@@ -1,0 +1,8 @@
+app:
+  client:
+    exchangeratesapi:
+      name: exchangerates-mock-api
+      url: http://localhost:9561
+      accessKey: 123456789
+
+

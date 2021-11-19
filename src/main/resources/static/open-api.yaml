@@ -1,0 +1,228 @@
+openapi: 3.0.1
+info:
+  title: Currency Transaction
+  description: Application responsible for converting currencies using external API
+  version: 0.0.1-SNAPSHOT
+tags:
+  - name: Conversion Transaction
+    description: Manage currencies transactions
+    externalDocs:
+      description: Reliable Exchange Rates & Currency Conversion
+      url: 'https://currencylayer.com'
+  - name: Actuator
+    description: Monitor and interact
+    externalDocs:
+      description: Spring Boot Actuator Web API Documentation
+      url: 'https://docs.spring.io/spring-boot/docs/current/actuator-api/html/'
+paths:
+  '/transaction/user/{userId}':
+    get:
+      tags:
+        - Conversion Transaction
+      summary: Get all currencies of user
+      operationId: allCurrenciesTransactions
+      parameters:
+        - name: userId
+          in: path
+          description: The user identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returned conversions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConversionTransactionResponse'
+        '404':
+          description: Non-existent user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+    post:
+      tags:
+        - Conversion Transaction
+      summary: Conversion between currencies
+      operationId: convertCurrencies
+      parameters:
+        - name: userId
+          in: path
+          description: The user identifier
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Values for conversion between currencies
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversionTransactionRequest'
+        required: true
+      responses:
+        '200':
+          description: Conversion performed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionTransactionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /actuator/info:
+    get:
+      tags:
+        - Actuator
+      operationId: actuator-info
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  '/actuator/health/{*path}':
+    get:
+      tags:
+        - Actuator
+      operationId: actuator-health-path
+      parameters:
+        - name: '*path'
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator/health:
+    get:
+      tags:
+        - Actuator
+      operationId: actuator-health
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator root web endpoint
+      operationId: links
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Link'
+components:
+  schemas:
+    ConversionTransactionRequest:
+      required:
+        - destinationCurrency
+        - originCurrency
+        - sourceValue
+      type: object
+      properties:
+        originCurrency:
+          maxLength: 3
+          minLength: 0
+          type: string
+          description: Currency of origin
+          example: USD
+        destinationCurrency:
+          maxLength: 3
+          minLength: 0
+          type: string
+          description: Destination currency
+          example: BRL
+        sourceValue:
+          maximum: 999999999.99
+          exclusiveMaximum: false
+          minimum: 0.01
+          exclusiveMinimum: false
+          type: number
+          description: Source value to be converted
+          example: 1256.29
+      description: Representation of conversion between currencies
+    ConversionTransactionResponse:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Transaction identifier
+          example: 2c61f9cc-472b-11ec-81d3-0242ac130003
+        userIdentifier:
+          type: string
+          description: User identifier
+          example: eb11b9d7-0a5f-4bd0-a582-d7e60cbf8b38
+        originCurrency:
+          type: string
+          description: Currency of origin
+          example: USD
+        destinationCurrency:
+          type: string
+          description: Destination currency
+          example: BRL
+        originValue:
+          type: number
+          description: Source value
+          example: 1256.29
+        destinationValue:
+          type: number
+          description: Destination value
+          example: 7562.96
+        conversionRate:
+          type: number
+          description: Conversion rate
+          example: 1.364
+        transactionTime:
+          type: string
+          description: Transaction time
+          format: date-time
+          example: '2021-01-30T08:30:00Z'
+      description: Representation of the currency conversion transaction response
+    ApiError:
+      type: object
+      properties:
+        requestId:
+          type: string
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiFieldError'
+    ApiFieldError:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
