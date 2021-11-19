@@ -34,8 +34,9 @@
 <p align="center">
  <a href="#dizzy-about">About</a> •
  <a href="#mega-features">Features</a> • 
- <a href="#rocket-technologies">Technologies</a> •
- <a href="#install">Install</a> •
+ <a href="#rocket-technologies-and-motivation">Technologies and motivation</a> •
+ <a href="#scroll-structure">Structure</a> •
+ <a href="#computer-building-locally">Building Locally</a> •
  <a href="#memo-license">License</a>
 
 </p>
@@ -56,45 +57,85 @@ In addition to offering performance due to its reactive behavior, the applicatio
 
 ---
 
-## :rocket: Technologies
+## :rocket: Technologies and motivation
 
 The project was developed using the following technologies
 
-- [Spring](https://spring.io/)
-- [Spring WebFlux](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
-- [Reactive MongoDB Embedded](https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo)
-- [Project Reactor](https://projectreactor.io/)
-- [Open API](https://swagger.io/specification/)
-- [Wiremock](http://wiremock.org/)
-- [Lombok](https://projectlombok.org/)
-- [GitHub Actions](https://github.com/features/actions)
-- [Heroku](https://www.heroku.com/what)
+- [Spring](): It makes programming in Java faster, easier and safer. Compared to other web ecosystems such as Quarkus, Vert.x, Javalin, it has a very simple configuration, with a large and present community, which makes it easier in the midst of development mishaps.
+- [Spring WebFlux](): In order to build an application aimed at the REST API, but to bring reactivity, asynchronism and performance, Spring Web Flux is able to provide this, keeping the code common to the conventional synchronous Rest API.
+- [Reactive MongoDB Embedded](): Provide a platform-neutral way to run embedded mongodb, not relying on an external server for the application and with a very fast build, dynamic by instance and powerful in processing.
+- [Open API](): Pursuing the API first concept, this specification enables independent writing of the REST APIs and the result is a complete documentation of request and response endpoints and objects
+- [Wiremock](): In order to perform integration tests in the application validation (check), Wiremock in an embedded way and with dynamic routes, makes it possible to test the flows where there is external communication and to validate error treatments, response bodies and logic.
+- [Lombok](): Lombok is used to reduce boilerplate code for model/data objects, e.g., it can generate getters and setters for those object automatically by using Lombok annotations.
+- [GitHub Actions](): As CI / CD process GitHub Actions provides a simple, powerful, integrated with various cloud providers and with the processing power and full feedback, therefore, it fulfills the final release of this product.
+- [Heroku](): Because it is flexible and with the possibility of deployment either via console or as part of the CI/CD deployment process from GitHub Actions, it is able to publish a new version of the application for free
 
 ---
 
-## 🗂 Install
+## :scroll: Structure
 
-```bash
-
-    # Clone the repository
-    $ git clone https://github.com/dansilva41/currency-transaction
-
-    # Enter directory
-    $ cd currency-transaction
-
-    # Install dependencies
-    $ mvn clean install
-
-    # Start the project
-    $ mvn springboot:run
+```text
+.
+├── docs                                                    README.md documentation related files
+├── logs                                                    Folder that stores application log records
+├── src
+│   ├── main
+│   │   ├── java
+│   │    │    └── tech.jaya.currencytransaction             Application main package
+│   │    │        ├── configuration                         Layer where the necessary instances are configured via Dependency Injection   
+│   │    │        ├── core                                  Application domain layer. Logic, dependent objects and business rules are found here.
+│   │    │        ├── dataprovider                          Implementation layer in data search and return, where there is a specific implementation of each external provider
+│   │    │        ├── entrypoint                            Presentation layer and exposure of asynchronous resources, as well as handling requests and errors
+│   │    │        ├── CurrencyTransactionApiApplication     Main class
+│   │    └── resources
+│   │        ├── i18n                                       Directory reserved for storing files differentiated by locale in messages interpolation
+│   │        │   └── messages.properties                    Default messages
+│   │        ├── static                                     
+│   │        │   └── open-api.yaml                          Descriptive file of the application's API specification
+│   │        ├── application.properties                     File that stores basic application information
+│   │        ├── application.yaml                           Application custom settings definition file
+│   │        └── logback.xml                                Configuration file for launching and handling logs
+│   └── test
+│       ├── java/tech/jaya/currencytransaction              Package where unit testing and integration testing implementations are concentrated
+│       └── resources
+│           ├── mock                                        Directory reserved for storing JSON files used by Wiremock fake requests
+│           └── application-test.xml                        Application custom settings definition file in the context of tests
+├── target
+│   └──currency-transaction-api-0.0.1.jar                   Generated jar
+├── pom.xml                                                 Fundamental unit of work in Maven for defining, resolving dependencies, and building the project
+├── LICENSE.md                                              Application license definition
+└── README.md                                               Application Documentary File
 ```
 
+## :computer: Building Locally
+
+### Requirements
+
+- [Maven]()
+- [Java 11]()
+
+### Install
+
+1. Clone the repository
+
+   `git clone https://github.com/dansilva41/currency-transaction`
+
+2. Enter directory
+   
+    `cd currency-transaction`
+
+3. Install dependencies
+   
+    `mvn clean install`
+
+### Run application
+
+    mvn springboot:run
 ---
 
-## :memo: License
-This project is under the MIT license. See the [LICENSE](https://github.com/dansilva41/currency-transaction/blob/main/LICENSE) for more information.
+### Additional
 
-## Checkstyle
+#### Checkstyle
 
 <details>
     <summary>01. Checking the project via maven plugin</summary>
@@ -115,7 +156,7 @@ Report generated in **target/site/checkstyle.html**.
 
 <details>
     <summary>02. Installing the CheckStyle-IDEA plugin on IntelliJ</summary>
-    
+
 We can use the CheckStyle-IDEA plugin to help formatting code in the IDE.
 To configure it is very simple, first install the plugin via the link above or on IntelliJ at
 **File > Settings > Plugins**.
@@ -145,4 +186,21 @@ To configure it is very simple, first install the plugin via the link above or o
 
 </details>
 
+---
+
+## :memo: License
+This project is under the MIT license. See the [LICENSE](https://github.com/dansilva41/currency-transaction/blob/main/LICENSE) for more information.
+
 Developed by Danilo Silva :wave: [Get in touch!](https://www.linkedin.com/in/danilosilvap/)
+
+[Spring]: https://spring.io/
+[Spring WebFlux]: https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html
+[Reactive MongoDB Embedded]: https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo
+[Project Reactor]: https://projectreactor.io/
+[Open API]: https://swagger.io/specification/
+[Wiremock]: http://wiremock.org/
+[Lombok]: https://projectlombok.org/
+[GitHub Actions]: https://github.com/features/actions
+[Heroku]: https://www.heroku.com/what
+[Maven]: https://maven.apache.org/install.html
+[Java 11]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
