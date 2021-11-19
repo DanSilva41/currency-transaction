@@ -5,7 +5,7 @@
 </h4>
 
 <h3 align="center">
-    Application responsible for converting currencies using external API
+    Simple, fast and reactive application to convert values between all currencies.
 </h3>
 
 <p align="center">
@@ -33,6 +33,7 @@
 
 <p align="center">
  <a href="#dizzy-about">About</a> •
+ <a href="#mega-features">Features</a> • 
  <a href="#rocket-technologies">Technologies</a> •
  <a href="#install">Install</a> •
  <a href="#memo-license">License</a>
@@ -41,7 +42,17 @@
 
 ## :dizzy: About
 
-Writing...
+This application is designed with currency-based value conversion in mind, where the focus is to get the conversion rates from an [external api](https://exchangeratesapi.io),
+perform the conversion calculations, persist the data and return to consistent data.
+In addition to offering performance due to its reactive behavior, the application provides a way to consult the conversions already carried out by the user.
+
+---
+## :mega: Features
+
+|          Actions                                  |     Available       |
+| --------------------------                        | :-----------------: |
+| Converting value between all currencies           |         ✔️           |
+| Get all conversions performed by user             |         ✔️           |
 
 ---
 
@@ -51,7 +62,13 @@ The project was developed using the following technologies
 
 - [Spring](https://spring.io/)
 - [Spring WebFlux](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
-- 
+- [Reactive MongoDB Embedded](https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo)
+- [Project Reactor](https://projectreactor.io/)
+- [Open API](https://swagger.io/specification/)
+- [Wiremock](http://wiremock.org/)
+- [Lombok](https://projectlombok.org/)
+- [GitHub Actions](https://github.com/features/actions)
+- [Heroku](https://www.heroku.com/what)
 
 ---
 
@@ -128,4 +145,4 @@ To configure it is very simple, first install the plugin via the link above or o
 
 </details>
 
-Developed by Danilo Silva
+Developed by Danilo Silva :wave: [Get in touch!](https://www.linkedin.com/in/danilosilvap/)
