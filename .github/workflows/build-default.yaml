@@ -9,9 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      USERNAME_PACKAGE_REGISTRY: ${{ secrets.USERNAME_PACKAGE_REGISTRY }}
-      PASSWORD_PACKAGE_REGISTRY: ${{ secrets.PASSWORD_PACKAGE_REGISTRY }}
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v2
@@ -32,6 +29,20 @@ jobs:
 
       - name: Build
         run: mvn --batch-mode clean package -DskipTests
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'maven'
 
       - name: Run tests
         run: mvn --batch-mode test
