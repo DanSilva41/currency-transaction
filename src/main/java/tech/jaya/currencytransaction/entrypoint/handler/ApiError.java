@@ -2,7 +2,6 @@ package tech.jaya.currencytransaction.entrypoint.handler;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,12 +16,6 @@ public class ApiError {
     public ApiError(String requestId, int status) {
         this.requestId = requestId;
         this.status = status;
-    }
-
-    public ApiError(String requestId, int status, List<ApiFieldError> errors) {
-        this.requestId = requestId;
-        this.status = status;
-        this.errors = errors;
     }
 
     public String getRequestId() {

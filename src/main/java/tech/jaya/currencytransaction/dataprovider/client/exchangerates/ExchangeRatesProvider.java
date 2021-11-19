@@ -1,5 +1,7 @@
 package tech.jaya.currencytransaction.dataprovider.client.exchangerates;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -9,9 +11,6 @@ import tech.jaya.currencytransaction.core.exception.BaseBusinessException;
 import tech.jaya.currencytransaction.core.exception.ErrorMessage;
 import tech.jaya.currencytransaction.core.model.ExchangeRates;
 import tech.jaya.currencytransaction.core.port.gateway.CurrencyLayer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Component
@@ -36,13 +35,13 @@ public class ExchangeRatesProvider implements CurrencyLayer {
     }
 
     public Map<String, Object> getQueryParamsExchangeWithSymbols(final String originCurrency, final String destinationCurrency) {
-        Map<String, Object> queryParamsExchangeWithSymbols = getDefaultQueryParamsExchange();
+        final var queryParamsExchangeWithSymbols = getDefaultQueryParamsExchange();
         queryParamsExchangeWithSymbols.put(ExchangeParameter.SYMBOLS_NAME_PARAMETER, String.join(",", originCurrency, destinationCurrency));
         return queryParamsExchangeWithSymbols;
     }
 
     public Map<String, Object> getDefaultQueryParamsExchange() {
-        Map<String, Object> queryParamsExchange = new HashMap<>();
+        final Map<String, Object> queryParamsExchange = new HashMap<>();
         queryParamsExchange.put(ExchangeParameter.ACCESS_KEY_NAME_PARAMETER, exchangeRatesAccessKey);
         return queryParamsExchange;
     }

@@ -1,14 +1,13 @@
 package tech.jaya.currencytransaction.core.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Builder
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class ExchangeRates {
 
     public boolean isInvalidRates(final Set<String> ratesForCompare) {
         return Objects.isNull(rates)
-                || rates.size() != 2
+                || rates.size() != ratesForCompare.size()
                 || !ratesForCompare.stream().allMatch(rates::containsKey);
     }
 }

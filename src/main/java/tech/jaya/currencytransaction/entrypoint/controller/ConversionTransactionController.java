@@ -1,12 +1,20 @@
 package tech.jaya.currencytransaction.entrypoint.controller;
 
+import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import tech.jaya.currencytransaction.core.usecase.ConvertCurrencies;
 import tech.jaya.currencytransaction.core.usecase.GetConvertTransactionsByUser;
@@ -15,11 +23,8 @@ import tech.jaya.currencytransaction.entrypoint.controller.converter.ConversionT
 import tech.jaya.currencytransaction.entrypoint.controller.vm.ConversionTransactionRequest;
 import tech.jaya.currencytransaction.entrypoint.controller.vm.ConversionTransactionResponse;
 
-import javax.validation.Valid;
-import java.util.List;
-
 /**
- * Reactive REST controller to manage currencies transactions
+ * Reactive REST controller to manage currencies transactions.
  */
 @Slf4j
 @RequiredArgsConstructor
@@ -41,8 +46,9 @@ public class ConversionTransactionController {
                 .flatMap(ConversionTransactionResponseConverter::toConversionTransactionResponse)
                 .collectList()
                 .flatMap(transactions -> {
-                    if (transactions.isEmpty())
+                    if (transactions.isEmpty()) {
                         return Mono.just(ResponseEntity.notFound().build());
+                    }
                     return Mono.just(ResponseEntity.ok(transactions));
                 });
     }

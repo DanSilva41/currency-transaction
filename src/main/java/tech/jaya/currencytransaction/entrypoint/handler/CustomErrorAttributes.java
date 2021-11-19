@@ -1,5 +1,8 @@
 package tech.jaya.currencytransaction.entrypoint.handler;
 
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
@@ -13,10 +16,6 @@ import tech.jaya.currencytransaction.core.exception.BaseBusinessException;
 import tech.jaya.currencytransaction.core.exception.ErrorMessage;
 import tech.jaya.currencytransaction.entrypoint.message.MessageComponent;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 @Component
 public class CustomErrorAttributes extends DefaultErrorAttributes {
 
@@ -28,24 +27,24 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
 
     @Override
     public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
-        var defaultErrorAttributes = super.getErrorAttributes(request, options);
-        var throwable = getError(request);
+        final var defaultErrorAttributes = super.getErrorAttributes(request, options);
+        final var throwable = getError(request);
         return Map.of("body", buildCustomErrorAttributes(throwable, defaultErrorAttributes));
     }
 
     private ApiError buildCustomErrorAttributes(Throwable throwable, Map<String, Object> defaultErrorAttributes) {
-        var apiError = buildDefaultApiErrorAttributes(defaultErrorAttributes);
+        final var apiError = buildDefaultApiErrorAttributes(defaultErrorAttributes);
         if (apiError.getStatus() == HttpStatus.NOT_FOUND.value()) {
             apiError.setMessage(messageComponent.getMessage(ErrorMessage.RESOURCE_NOT_FOUND));
         } else if (throwable instanceof BaseBusinessException) {
-            var baseBusinessException = (BaseBusinessException) throwable;
+            final var baseBusinessException = (BaseBusinessException) throwable;
             apiError.setStatus(baseBusinessException.getStatus());
             apiError.setMessage(messageComponent.getMessage(baseBusinessException.getErrorMessage()));
         } else if (throwable instanceof ResponseStatusException) {
-            var responseStatusException = (ResponseStatusException) throwable;
+            final var responseStatusException = (ResponseStatusException) throwable;
 
             if (responseStatusException instanceof WebExchangeBindException) {
-                var webExchangeBindException = (WebExchangeBindException) throwable;
+                final var webExchangeBindException = (WebExchangeBindException) throwable;
                 this.handleWebExchangeBindException(webExchangeBindException, apiError);
             } else if (responseStatusException instanceof ServerWebInputException) {
                 apiError.setMessage(messageComponent.getMessage(ErrorMessage.REQUEST_BODY_MISSING));
@@ -69,7 +68,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
     private void handleWebExchangeBindException(WebExchangeBindException webExchangeBindException,
                                                 ApiError apiError) {
 
-        var fieldErrors = webExchangeBindException.getFieldErrors();
+        final var fieldErrors = webExchangeBindException.getFieldErrors();
         if (!fieldErrors.isEmpty()) {
             apiError.setErrors(fieldErrors.stream()
                     .map(error -> new ApiFieldError(error.getField(), error.getDefaultMessage()))

@@ -1,10 +1,9 @@
 package tech.jaya.currencytransaction.entrypoint.controller.vm;
 
-import lombok.Builder;
-import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Getter;
 
 @Builder
 @Getter

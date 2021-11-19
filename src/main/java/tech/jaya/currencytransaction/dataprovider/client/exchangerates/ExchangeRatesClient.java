@@ -3,9 +3,8 @@ package tech.jaya.currencytransaction.dataprovider.client.exchangerates;
 import feign.Headers;
 import feign.QueryMap;
 import feign.RequestLine;
-import reactor.core.publisher.Mono;
-
 import java.util.Map;
+import reactor.core.publisher.Mono;
 
 @Headers("Content-Type: application/json")
 public interface ExchangeRatesClient {

@@ -5,13 +5,16 @@ import java.math.RoundingMode;
 
 abstract class CalculateCurrenciesConversion {
 
+    private static final int LARGE_SCALE = 6;
+    private static final int SHORT_SCALE = 2;
+    
     protected BigDecimal convertValue(final BigDecimal originValue, final BigDecimal rateOfOriginCurrency,
                                       final BigDecimal rateOfDestinationCurrency) {
-        var valueInBaseCurrency = originValue.multiply(BigDecimal.ONE.divide(rateOfOriginCurrency, 6, RoundingMode.FLOOR));
-        return valueInBaseCurrency.multiply(rateOfDestinationCurrency).setScale(2, RoundingMode.FLOOR);
+        final var valueInBaseCurrency = originValue.multiply(BigDecimal.ONE.divide(rateOfOriginCurrency, LARGE_SCALE, RoundingMode.FLOOR));
+        return valueInBaseCurrency.multiply(rateOfDestinationCurrency).setScale(SHORT_SCALE, RoundingMode.FLOOR);
     }
 
     protected BigDecimal getConversionRate(final BigDecimal originValue, final BigDecimal destinationValue) {
-        return destinationValue.divide(originValue, 6, RoundingMode.HALF_UP);
+        return destinationValue.divide(originValue, LARGE_SCALE, RoundingMode.HALF_UP);
     }
 }

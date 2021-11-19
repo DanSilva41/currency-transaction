@@ -1,12 +1,15 @@
 package tech.jaya.currencytransaction.entrypoint.controller.vm;
 
+import java.math.BigDecimal;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import javax.validation.constraints.*;
-import java.math.BigDecimal;
 
 @ToString
 @AllArgsConstructor

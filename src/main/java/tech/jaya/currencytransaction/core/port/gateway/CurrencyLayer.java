@@ -5,5 +5,5 @@ import tech.jaya.currencytransaction.core.model.ExchangeRates;
 
 public interface CurrencyLayer {
 
-    Mono<ExchangeRates> getConversionRates(final String originCurrency, final String destinationCurrency);
+    Mono<ExchangeRates> getConversionRates(String originCurrency, String destinationCurrency);
 }

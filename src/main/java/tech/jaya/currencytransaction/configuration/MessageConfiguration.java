@@ -11,7 +11,7 @@ public class MessageConfiguration {
 
     @Bean
     public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        final var messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames("i18n/messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
@@ -19,7 +19,7 @@ public class MessageConfiguration {
 
     @Bean
     public LocalValidatorFactoryBean getValidator() {
-        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        final var bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
     }

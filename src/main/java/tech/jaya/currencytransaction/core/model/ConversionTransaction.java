@@ -1,14 +1,17 @@
 package tech.jaya.currencytransaction.core.model;
 
-import lombok.*;
-import tech.jaya.currencytransaction.core.exception.BaseBusinessException;
-import tech.jaya.currencytransaction.core.exception.ErrorMessage;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import tech.jaya.currencytransaction.core.exception.BaseBusinessException;
+import tech.jaya.currencytransaction.core.exception.ErrorMessage;
 
 @Builder
 @AllArgsConstructor
@@ -30,8 +33,9 @@ public class ConversionTransaction extends CalculateCurrenciesConversion {
 
     public void convertCurrencies(final BigDecimal rateOfOriginCurrency,
                                   final BigDecimal rateOfDestinationCurrency) {
-        if (conversionHasAlreadyTakenPlace())
+        if (conversionHasAlreadyTakenPlace()) {
             throw new BaseBusinessException(ErrorMessage.CONVERSION_ALREADY_TAKEN_PLACE);
+        }
         this.destinationValue = super.convertValue(originValue, rateOfOriginCurrency, rateOfDestinationCurrency);
         this.conversionRate = super.getConversionRate(originValue, destinationValue);
         this.transactionTime = LocalDateTime.now(ZoneOffset.UTC);

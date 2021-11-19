@@ -21,6 +21,7 @@
         <open-api-webflux-ui.version>1.5.12</open-api-webflux-ui.version>
         <feign-reactor-spring-cloud.version>3.1.1</feign-reactor-spring-cloud.version>
         <wiremock.version>2.27.2</wiremock.version>
+        <checkstyle-maven-plugin.version>3.1.1</checkstyle-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -108,7 +109,48 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>code-quality-enforcement/checkstyle.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>false</failsOnError>
+                            <failOnViolation>true</failOnViolation>
+                            <violationSeverity>warning</violationSeverity>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle-maven-plugin.version}</version>
+                <configuration>
+                    <configLocation>code-quality-enforcement/checkstyle.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>true</linkXRef>
+                    <failOnViolation>true</failOnViolation>
+                    <enableFilesSummary>true</enableFilesSummary>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

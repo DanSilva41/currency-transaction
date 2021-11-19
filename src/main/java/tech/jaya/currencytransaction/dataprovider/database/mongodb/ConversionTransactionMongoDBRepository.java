@@ -6,5 +6,5 @@ import tech.jaya.currencytransaction.dataprovider.database.mongodb.collection.Co
 
 public interface ConversionTransactionMongoDBRepository extends ReactiveMongoRepository<ConversionTransactionData, String> {
 
-    Flux<ConversionTransactionData> findAllByUserIdentifier(final String userIdentifier);
+    Flux<ConversionTransactionData> findAllByUserIdentifier(String userIdentifier);
 }
