@@ -40,7 +40,7 @@ public class ConversionTransactionController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/user/{userId}")
     public Mono<ResponseEntity<List<ConversionTransactionResponse>>> allCurrenciesTransactions(@PathVariable("userId") final String userId) {
-        log.info("allCurrenciesTransactions: userId = {}", userId);
+        log.info("GET allCurrenciesTransactions: userId = {}", userId);
 
         return getConvertTransactionsByUser.execute(userId)
                 .flatMap(ConversionTransactionResponseConverter::toConversionTransactionResponse)
@@ -57,7 +57,7 @@ public class ConversionTransactionController {
     @PostMapping(value = "/user/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ConversionTransactionResponse> convertCurrencies(@PathVariable("userId") final String userId,
                                                                  @Valid @RequestBody final ConversionTransactionRequest request) {
-        log.info("convertCurrencies: userId = {} | request = {}", userId, request);
+        log.info("POST convertCurrencies: userId = {} | request = {}", userId, request);
 
         return ConversionTransactionRequestConverter.toConversionTransaction(userId, request)
                 .flatMap(convertCurrencies::execute)

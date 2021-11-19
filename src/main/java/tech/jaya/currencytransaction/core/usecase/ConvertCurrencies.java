@@ -22,6 +22,7 @@ public class ConvertCurrencies {
         return Mono.just(conversionToExecute)
                 .doOnNext(x -> {
                     if (conversionToExecute.verifyIfOriginAndDestinationCurrencySame()) {
+                        log.debug("Business | convertCurrencies | exception | CURRENCIES_MUST_BE_DIFFERENT");
                         throw new BaseBusinessException(ErrorMessage.CURRENCIES_MUST_BE_DIFFERENT);
                     }
                 })
@@ -29,11 +30,16 @@ public class ConvertCurrencies {
                 .doOnNext(exchangeRates -> {
                     final var currencies = Set.of(conversionToExecute.getOriginCurrency(), conversionToExecute.getDestinationCurrency());
                     if (exchangeRates.isInvalidRates(currencies)) {
+                        log.debug("Business | convertCurrencies | exception | WAS_NOT_POSSIBLE_GET_EXCHANGE_RATES");
                         throw new BaseBusinessException(ErrorMessage.WAS_NOT_POSSIBLE_GET_EXCHANGE_RATES);
                     }
                 })
                 .flatMap(exchangeRates -> {
+                    log.debug("Business | convertCurrencies | call conversion");
+
                     callConversion(exchangeRates, conversionToExecute);
+
+                    log.debug("Business | convertCurrencies | next |save conversion transaction");
                     return Mono.just(conversionToExecute);
                 })
                 .flatMap(conversionTransactionRepository::save);
