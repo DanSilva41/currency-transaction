@@ -28,6 +28,6 @@ app:
     exchangeratesapi:
       name: exchangerates-api
       url: http://api.exchangeratesapi.io/v1/latest
-      accessKey: da17c66a742789f80ab7fb04a15f01c9
+      accessKey: ${EXCHANGES_RATES_ACCESS_KEY}
 
 
