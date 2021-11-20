@@ -131,7 +131,10 @@ The project was developed using the following technologies
 
 ### Run application
 
-    mvn springboot:run
+    `mvn springboot:run`
+
+Open http://localhost:8080/swagger-ui.html
+
 ---
 
 ### Additional

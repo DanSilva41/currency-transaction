@@ -37,7 +37,7 @@ public class ConversionTransactionController {
     private final GetConvertTransactionsByUser getConvertTransactionsByUser;
 
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(code = HttpStatus.OK, reason = "Returned conversions")
     @GetMapping(value = "/user/{userId}")
     public Mono<ResponseEntity<List<ConversionTransactionResponse>>> allCurrenciesTransactions(@PathVariable("userId") final String userId) {
         log.info("GET allCurrenciesTransactions: userId = {}", userId);
@@ -53,7 +53,7 @@ public class ConversionTransactionController {
                 });
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(code = HttpStatus.CREATED, reason = "Conversion performed")
     @PostMapping(value = "/user/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ConversionTransactionResponse> convertCurrencies(@PathVariable("userId") final String userId,
                                                                  @Valid @RequestBody final ConversionTransactionRequest request) {

@@ -63,8 +63,8 @@ paths:
               $ref: '#/components/schemas/ConversionTransactionRequest'
         required: true
       responses:
-        '200':
-          description: Conversion performed.
+        '201':
+          description: Conversion performed
           content:
             application/json:
               schema:
