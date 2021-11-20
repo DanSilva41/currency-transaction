@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Currency Transaction
   description: Application responsible for converting currencies using external API
-  version: 0.0.1-SNAPSHOT
+  version: 1.0.0
 tags:
   - name: Conversion Transaction
     description: Manage currencies transactions
