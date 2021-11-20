@@ -1,7 +1,7 @@
 <img align="center" src="docs/logo.png" alt="Currency Transaction">
     
 <h4 align="center">
-    <a href="https://rocketmusics.herokuapp.com/">Live demo</a>
+    <a href="https://currency-transaction.herokuapp.com/swagger-ui.html">Live demo</a>
 </h4>
 
 <h3 align="center">
